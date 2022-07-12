@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\DTO\RetornoLoginDTO;
+use App\DTO\ReturnLoginDTO;
 use App\Interfaces\Service\LoginService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class LoginController extends Controller
     public function __construct(LoginService $loginService)
     {
         $this->service = $loginService;
-        $this->DTO = new RetornoLoginDTO();
+        $this->DTO = new ReturnLoginDTO();
     }
 
     /**

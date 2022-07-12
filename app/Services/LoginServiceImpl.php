@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\DTO\RetornoLoginDTO;
+use App\DTO\ReturnLoginDTO;
 use App\Helpers\Helpers;
 use App\Interfaces\Repository\UsersRepository;
 use App\Interfaces\Service\LoginService;
@@ -20,7 +20,7 @@ class LoginServiceImpl implements LoginService
     public function __construct(UsersRepository $usersRepository)
     {
         $this->usersRepository = $usersRepository;
-        $this->DTO = new RetornoLoginDTO();
+        $this->DTO = new ReturnLoginDTO();
         $this->dateTime = new \DateTime();
     }
 
@@ -28,7 +28,7 @@ class LoginServiceImpl implements LoginService
     /**
      * @throws \Exception
      */
-    public function loginUser(\stdClass $data): RetornoLoginDTO
+    public function loginUser(\stdClass $data): ReturnLoginDTO
     {
         $result = $this->usersRepository->getUserByPassword($data->username, $data->password);
 

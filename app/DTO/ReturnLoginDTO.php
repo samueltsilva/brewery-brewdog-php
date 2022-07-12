@@ -2,7 +2,7 @@
 
 namespace App\DTO;
 
-class RetornoLoginDTO extends RetornoDTO
+class ReturnLoginDTO extends ReturnDTO
 {
     protected $auth = array();
 

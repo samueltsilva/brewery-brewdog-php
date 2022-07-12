@@ -2,7 +2,7 @@
 
 namespace App\DTO;
 
-class RetornoDTO
+class ReturnDTO
 {
     protected $statusCode;
     protected $mensagem;
@@ -41,7 +41,7 @@ class RetornoDTO
 
     /**
      * @param mixed $statusCode
-     * @return RetornoDTO
+     * @return ReturnDTO
      */
     public function setStatusCode(int $statusCode) : void
     {
@@ -50,7 +50,7 @@ class RetornoDTO
 
     /**
      * @param mixed $mensagem
-     * @return RetornoDTO
+     * @return ReturnDTO
      */
     public function setMessage(string $mensagem) : void
     {

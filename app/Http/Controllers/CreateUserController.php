@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\DTO\RetornoLoginDTO;
+use App\DTO\ReturnLoginDTO;
+use App\Interfaces\Service\CreateUserService;
 use App\Interfaces\Service\LoginService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
@@ -19,10 +20,10 @@ class CreateUserController extends Controller
     private $service;
     private $DTO;
 
-    public function __construct(LoginService $loginService)
+    public function __construct(CreateUserService $createUserService)
     {
-        $this->service = $loginService;
-        $this->DTO = new RetornoLoginDTO();
+        $this->service = $createUserService;
+        $this->DTO = new ReturnLoginDTO();
     }
 
     public function create(Request $request) : JsonResponse
@@ -58,7 +59,7 @@ class CreateUserController extends Controller
             : null;
 
         //If everything's ok, go to the responsible service.
-        $result = $this->service->loginUser($data);
+        $result = $this->service->createUser($data);
 
         Log::info(
             'Controller: LoginController\login. Object returned to Application Service: ',

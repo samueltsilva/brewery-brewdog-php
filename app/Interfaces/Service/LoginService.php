@@ -2,9 +2,9 @@
 
 namespace App\Interfaces\Service;
 
-use App\DTO\RetornoLoginDTO;
+use App\DTO\ReturnLoginDTO;
 
 interface LoginService
 {
-    public function loginUser(\stdClass $data) : RetornoLoginDTO;
+    public function loginUser(\stdClass $data) : ReturnLoginDTO;
 }
