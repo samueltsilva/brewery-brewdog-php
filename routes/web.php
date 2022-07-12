@@ -23,10 +23,23 @@ $router->post(
     ['uses' => 'LoginController@login', 'as' => 'login']
 );
 
+$router->get(
+    'user',
+    ['uses' => 'GetUserController@get', 'as' => 'user/get']
+);
 $router->post(
     'user',
     ['middleware' => 'auth', 'uses' => 'CreateUserController@create', 'as' => 'user/create']
 );
+$router->put(
+    'user',
+    ['middleware' => 'auth', 'uses' => 'UpdateUserController@update', 'as' => 'user/update']
+);
+$router->delete(
+    'user',
+    ['uses' => 'DeleteUserController@delete', 'as' => 'user/delete']
+);
+
 
 
 
