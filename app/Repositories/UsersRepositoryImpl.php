@@ -16,6 +16,24 @@ class UsersRepositoryImpl implements UsersRepository
         $this->usersModel = $users;
     }
 
+    public function getUserById(int $id) : ? Users
+    {
+        return $this->usersModel
+            ->setConnection('brewery')
+            ->select('*')
+            ->where('id_users', $id)
+            ->first();
+    }
+
+    public function getUserByUsername(string $username) : ? Users
+    {
+        return $this->usersModel
+            ->setConnection('brewery')
+            ->select('*')
+            ->where('username', $username)
+            ->first();
+    }
+
     public function getUserByPassword(string $username, string $password) : ? Users
     {
         return $this->usersModel
@@ -30,11 +48,11 @@ class UsersRepositoryImpl implements UsersRepository
     {
         $this->usersModel->setAttribute('username', $data->username);
         $this->usersModel->setAttribute('password', $data->password);
-        $this->usersModel->setAttribute('first_name', $data->first_name);
+        $this->usersModel->setAttribute('first_name', $data->firstName);
         $this->usersModel->setAttribute('address', $data->address);
         $this->usersModel->setAttribute('number', $data->number);
         $this->usersModel->setAttribute('status', $data->status);
-        $this->usersModel->setAttribute('last_name', $data->last_name);
+        $this->usersModel->setAttribute('last_name', $data->lastName);
 
         $this->usersModel->setConnection('brewery')->save();
 

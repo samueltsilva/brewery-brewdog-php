@@ -24,16 +24,16 @@ $router->post(
 );
 
 $router->get(
-    'user',
+    'user[/{idUsers}{username}]',
     ['uses' => 'GetUserController@get', 'as' => 'user/get']
 );
 $router->post(
     'user',
-    ['middleware' => 'auth', 'uses' => 'CreateUserController@create', 'as' => 'user/create']
+    ['uses' => 'CreateUserController@create', 'as' => 'user/create']
 );
 $router->put(
     'user',
-    ['middleware' => 'auth', 'uses' => 'UpdateUserController@update', 'as' => 'user/update']
+    ['uses' => 'UpdateUserController@update', 'as' => 'user/update']
 );
 $router->delete(
     'user',

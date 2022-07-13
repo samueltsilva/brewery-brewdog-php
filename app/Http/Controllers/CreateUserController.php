@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\DTO\ReturnLoginDTO;
+use App\DTO\ReturnCreateUserDTO;
 use App\Interfaces\Service\CreateUserService;
-use App\Interfaces\Service\LoginService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -23,7 +22,7 @@ class CreateUserController extends Controller
     public function __construct(CreateUserService $createUserService)
     {
         $this->service = $createUserService;
-        $this->DTO = new ReturnLoginDTO();
+        $this->DTO = new ReturnCreateUserDTO();
     }
 
     public function create(Request $request) : JsonResponse
@@ -38,7 +37,7 @@ class CreateUserController extends Controller
         [
             'username' => 'required',
             'password' => 'required',
-            'first_name' => 'required',
+            'firstName' => 'required',
             'address' => 'required',
             'number' => 'required'
         ]);
@@ -48,14 +47,14 @@ class CreateUserController extends Controller
         //Required
         $data->username = (string) $request->input('username');
         $data->password = md5($request->input('password'));
-        $data->first_name = (string) $request->input('first_name');
+        $data->firstName = (string) $request->input('firstName');
         $data->address = (string) $request->input('address');
         $data->number = (int) $request->input('number');
         $data->status = 1;
 
         //Optionals
-        $data->last_name = $request->has('last_name')
-            ? $request->input('last_name')
+        $data->lastName = $request->has('lastName')
+            ? $request->input('lastName')
             : null;
 
         //If everything's ok, go to the responsible service.

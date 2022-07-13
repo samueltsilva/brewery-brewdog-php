@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\DTO\ReturnLoginDTO;
-use App\Interfaces\Service\CreateUserService;
-use App\Interfaces\Service\LoginService;
+use App\DTO\ReturnGetUserDTO;
+use App\Interfaces\Service\GetUserService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -20,10 +19,10 @@ class GetUserController extends Controller
     private $service;
     private $DTO;
 
-    public function __construct(CreateUserService $createUserService)
+    public function __construct(GetUserService $getUserService)
     {
-        $this->service = $createUserService;
-        $this->DTO = new ReturnLoginDTO();
+        $this->service = $getUserService;
+        $this->DTO = new ReturnGetUserDTO();
     }
 
     public function get(Request $request) : JsonResponse
@@ -43,11 +42,13 @@ class GetUserController extends Controller
             ? (string) $request->input('username')
             : null;
 
-        if ( ! $request->has('idUsers') && ! $request->has('username') )
-        {
+        if (
+            (! $request->has('idUsers') && ! $request->has('username'))
+            || ($request->has('idUsers') && $request->has('username'))
+        ) {
             $this->DTO->setStatusCode(400);
             $this->DTO->setCode(5005);
-            $this->DTO->setMessage('');
+            $this->DTO->setMessage('You need to provide one user search parameter in Get query ( (int) idUsers or (string) username ).');
 
             return \response()->json(
                 $this->DTO->retornarArray(),
@@ -58,7 +59,7 @@ class GetUserController extends Controller
         }
 
         //If everything's ok, go to the responsible service.
-        $result = $this->service->createUser($data);
+        $result = $this->service->getUser($data);
 
         Log::info(
             'Controller: LoginController\login. Object returned to Application Service: ',
