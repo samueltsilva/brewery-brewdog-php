@@ -10,4 +10,5 @@ interface UsersRepository
     public function GetUserByUsername(string $username) : ? Users;
     public function getUserByPassword(string $username, string $password) : ? Users;
     public function createUser(\stdClass $data) : int;
+    public function updateUser(\stdClass $data) : bool;
 }

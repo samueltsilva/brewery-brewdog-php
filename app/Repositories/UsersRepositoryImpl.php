@@ -6,6 +6,7 @@ use App\DTO\ReturnLoginDTO;
 use App\Interfaces\Repository\UsersRepository;
 use App\Models\User;
 use App\Models\Users;
+use Illuminate\Support\Facades\DB;
 
 class UsersRepositoryImpl implements UsersRepository
 {
@@ -22,6 +23,7 @@ class UsersRepositoryImpl implements UsersRepository
             ->setConnection('brewery')
             ->select('*')
             ->where('id_users', $id)
+            ->where('deleted_at', null)
             ->first();
     }
 
@@ -31,6 +33,7 @@ class UsersRepositoryImpl implements UsersRepository
             ->setConnection('brewery')
             ->select('*')
             ->where('username', $username)
+            ->where('deleted_at', null)
             ->first();
     }
 
@@ -41,6 +44,7 @@ class UsersRepositoryImpl implements UsersRepository
             ->select('*')
             ->where('username', $username)
             ->where('password', $password)
+            ->where('deleted_at', null)
             ->first();
     }
 
@@ -57,5 +61,17 @@ class UsersRepositoryImpl implements UsersRepository
         $this->usersModel->setConnection('brewery')->save();
 
         return $this->usersModel->getAttribute('id_users');
+    }
+
+    public function updateUser(\stdClass $data): bool
+    {
+        $resultUser = $this->usersModel->setConnection('brewery')
+            ->find($data->idUsers);
+
+        unset($data->idUsers);
+        foreach ($data as $key => $value)
+            $resultUser->$key = $value;
+
+        return $resultUser->save();
     }
 }

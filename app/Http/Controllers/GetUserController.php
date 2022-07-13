@@ -28,7 +28,7 @@ class GetUserController extends Controller
     public function get(Request $request) : JsonResponse
     {
         Log::info(
-            'Controller: UserController\get. Object received from Application Service: ',
+            'Controller: GetUserController\get. Object received from Application Service: ',
             ['Object' => $request->all()]
         );
 
@@ -62,7 +62,7 @@ class GetUserController extends Controller
         $result = $this->service->getUser($data);
 
         Log::info(
-            'Controller: LoginController\login. Object returned to Application Service: ',
+            'Controller: GetUserController\get. Object returned to Application Service: ',
             ['Object' => $result->retornarArray()]
         );
 

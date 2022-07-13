@@ -25,6 +25,7 @@ class GetUserServiceImpl implements GetUserService
 
         if ( empty($result)  )
         {
+            $this->DTO->setStatusCode(406);
             $this->DTO->setCode(5006);
             $this->DTO->setMessage('No user found for the key provided.');
 
