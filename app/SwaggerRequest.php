@@ -257,3 +257,65 @@
  *
  * )
  */
+
+
+/**
+ *  @OA\Get(
+ *     tags={"Beers"},
+ *     path="/beers",
+ *     description="route to get the beers from Brewery Brewdog.",
+ *     security={{"bearerAuth":{}}},
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="idUsers",
+ *      description="The id_users.",
+ *      @OA\Schema(
+ *          type="integer",
+ *          default=1,
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="username",
+ *      description="The unique username of the user.",
+ *      @OA\Schema(
+ *          type="string",
+ *          default="",
+ *      )
+ * ),
+ *     @OA\Response(response="200", description="Sucess",
+ *         content={
+ *             @OA\MediaType(
+ *                 mediaType="application/json",
+ *                 @OA\Schema(
+ *                     type="array",
+ *                     @OA\Items(
+ *                      @OA\Property(property="message", type="string"),
+ *                      @OA\Property(property="internalCode", type="integer"),
+ *                      @OA\Property(property="user", type="object",
+ *                          @OA\Property(property="id_users", type="integer"),
+ *                          @OA\Property(property="username", type="string"),
+ *                          @OA\Property(property="password", type="string"),
+ *                          @OA\Property(property="first_name", type="string"),
+ *                          @OA\Property(property="last_name", type="string"),
+ *                          @OA\Property(property="address", type="string"),
+ *                          @OA\Property(property="number", type="integer"),
+ *                          @OA\Property(property="status", type="integer"),
+ *                          @OA\Property(property="created_at", type="string"),
+ *                          @OA\Property(property="updated_at", type="string"),
+ *                          @OA\Property(property="deleted_at", type="string"),
+ *                     ),
+ *                 )
+ *               )
+ *            )
+ *        }
+ *     ),
+ *     @OA\Response(response="401", description="Unauthorized"),
+ *     @OA\Response(response="403", description="Forbidden"),
+ *     @OA\Response(response="404", description="Not Found"),
+ *     @OA\Response(response="406", description="Not Acceptable"),
+ *     @OA\Response(response="500", description="Internal Server Error")
+ * )
+ */

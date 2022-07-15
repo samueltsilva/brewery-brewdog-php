@@ -40,6 +40,11 @@ $router->delete(
     ['uses' => 'DeleteUserController@delete', 'as' => 'user/delete']
 );
 
+$router->get(
+    'beers',
+    ['middleware' => 'auth', 'uses' => 'BeersController@get', 'as' => 'beers/get']
+);
+
 
 
 

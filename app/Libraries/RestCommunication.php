@@ -13,7 +13,7 @@ class RestCommunication
 
         $responseIntegracao = Http::accept($accept)
             ->withToken($authorization)
-            ->timeout(60)
+            ->timeout(10)
             ->get($url);
 
         $response["statusCode"] = $responseIntegracao->status();
