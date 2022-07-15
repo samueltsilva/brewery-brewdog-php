@@ -25,6 +25,9 @@ class CreateUserController extends Controller
         $this->DTO = new ReturnCreateUserDTO();
     }
 
+    /**
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function create(Request $request) : JsonResponse
     {
         Log::info(

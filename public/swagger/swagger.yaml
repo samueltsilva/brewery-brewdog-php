@@ -1,0 +1,233 @@
+openapi: 3.0.0
+info:
+  title: 'RestAPI Brewery Brewdog'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8080'
+    description: 'Local Server'
+paths:
+  /login:
+    post:
+      tags:
+        - Login
+      description: 'Users login.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+              type: object
+      responses:
+        '201':
+          description: Sucess
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties: { message: { type: string }, internalCode: { type: integer }, auth: { properties: { token: { type: string }, type: { type: string }, expiresAt: { type: string } }, type: object } }
+                  type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: 'Not Found'
+        '406':
+          description: 'Not Acceptable'
+        '500':
+          description: 'Internal Server Error'
+      security:
+        -
+          bearerAuth: []
+  /user:
+    get:
+      tags:
+        - 'User operations'
+      description: 'Get the user from the database.'
+      parameters:
+        -
+          parameter: general--page
+          name: idUsers
+          in: query
+          description: 'The id_users.'
+          schema:
+            type: integer
+            default: 1
+        -
+          parameter: general--page
+          name: username
+          in: query
+          description: 'The unique username of the user.'
+          schema:
+            type: string
+            default: ''
+      responses:
+        '200':
+          description: Sucess
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties: { message: { type: string }, internalCode: { type: integer }, user: { properties: { id_users: { type: integer }, username: { type: string }, password: { type: string }, first_name: { type: string }, last_name: { type: string }, address: { type: string }, number: { type: integer }, status: { type: integer }, created_at: { type: string }, updated_at: { type: string }, deleted_at: { type: string } }, type: object } }
+                  type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: 'Not Found'
+        '406':
+          description: 'Not Acceptable'
+        '500':
+          description: 'Internal Server Error'
+      security:
+        -
+          bearerAuth: []
+    put:
+      tags:
+        - 'User operations'
+      description: 'Updates a user.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                idUsers:
+                  type: integer
+                username:
+                  type: string
+                password:
+                  type: string
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                address:
+                  type: string
+                number:
+                  type: integer
+                status:
+                  type: integer
+              type: object
+      responses:
+        '201':
+          description: Sucess
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties: { message: { type: string }, internalCode: { type: integer }, updated: { type: boolean } }
+                  type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: 'Not Found'
+        '406':
+          description: 'Not Acceptable'
+        '500':
+          description: 'Internal Server Error'
+      security:
+        -
+          bearerAuth: []
+    post:
+      tags:
+        - 'User operations'
+      description: 'Creates a user.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                firstName:
+                  type: string
+                address:
+                  type: string
+                number:
+                  type: integer
+                lastName:
+                  type: string
+              type: object
+      responses:
+        '201':
+          description: Sucess
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties: { message: { type: string }, internalCode: { type: integer }, idUsers: { type: integer } }
+                  type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: 'Not Found'
+        '406':
+          description: 'Not Acceptable'
+        '500':
+          description: 'Internal Server Error'
+      security:
+        -
+          bearerAuth: []
+    delete:
+      tags:
+        - 'User operations'
+      description: 'Deletes a user.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                idUsers:
+                  type: integer
+              type: object
+      responses:
+        '201':
+          description: Sucess
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties: { message: { type: string }, internalCode: { type: integer }, deleted: { type: boolean } }
+                  type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: 'Not Found'
+        '406':
+          description: 'Not Acceptable'
+        '500':
+          description: 'Internal Server Error'
+      security:
+        -
+          bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      name: bearerAuth
+      in: header
+      bearerFormat: JWT
+      scheme: bearer

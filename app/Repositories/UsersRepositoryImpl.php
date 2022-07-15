@@ -11,10 +11,12 @@ use Illuminate\Support\Facades\DB;
 class UsersRepositoryImpl implements UsersRepository
 {
     private $usersModel;
+    private $dateTime;
 
     public function __construct(Users $users)
     {
         $this->usersModel = $users;
+        $this->dateTime = new \DateTime();
     }
 
     public function getUserById(int $id) : ? Users
@@ -71,6 +73,16 @@ class UsersRepositoryImpl implements UsersRepository
         unset($data->idUsers);
         foreach ($data as $key => $value)
             $resultUser->$key = $value;
+
+        return $resultUser->save();
+    }
+
+    public function deleteUser(\stdClass $data): bool
+    {
+        $resultUser = $this->usersModel->setConnection('brewery')
+            ->find($data->idUsers);
+
+        $resultUser->deleted_at = $this->dateTime;
 
         return $resultUser->save();
     }

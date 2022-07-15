@@ -33,7 +33,7 @@ class GetUserServiceImpl implements GetUserService
         }
 
         $this->DTO->setStatusCode(200);
-        $this->DTO->setMessage('User found successfully.!');
+        $this->DTO->setMessage('User found successfully!');
         $this->DTO->setCode(9001);
         $this->DTO->setUser($result);
 

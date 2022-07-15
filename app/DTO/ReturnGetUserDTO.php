@@ -9,7 +9,7 @@ class ReturnGetUserDTO extends ReturnDTO
     protected $user;
 
     /**
-     * @return array
+     * @return Users
      */
     public function getUser(): Users
     {
@@ -17,7 +17,7 @@ class ReturnGetUserDTO extends ReturnDTO
     }
 
     /**
-     * @param array $user
+     * @param Users $user
      */
     public function setUser(Users $user): void
     {
@@ -26,7 +26,7 @@ class ReturnGetUserDTO extends ReturnDTO
 
     public function retornarArray() : array
     {
-        return $this->getStatusCode() === 201
+        return $this->getStatusCode() === 200
             ?  [
             'message' => $this->getMessage(),
             'internalCode' => $this->getCode(),

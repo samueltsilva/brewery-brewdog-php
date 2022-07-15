@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\DTO\ReturnCreateUserDTO;
-use App\Interfaces\Service\CreateUserService;
+use App\DTO\ReturnUpdateUserDTO;
 use App\Interfaces\Service\UpdateUserService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
@@ -23,7 +22,7 @@ class UpdateUserController extends Controller
     public function __construct(UpdateUserService $updateUserService)
     {
         $this->service = $updateUserService;
-        $this->DTO = new ReturnCreateUserDTO();
+        $this->DTO = new ReturnUpdateUserDTO();
     }
 
     public function update(Request $request) : JsonResponse
@@ -46,22 +45,25 @@ class UpdateUserController extends Controller
 
         //Optionals to be updated
         if ( $request->has('username') )
-            $data->username = $request->input('username');
+            $data->username = (string) $request->input('username');
 
         if ( $request->has('password') )
-            $data->password = $request->input('password');
+            $data->password = md5($request->input('password'));
 
         if ( $request->has('firsName') )
-            $data->first_name = $request->input('firsName');
+            $data->first_name = (string) $request->input('firsName');
 
         if ( $request->has('lastName') )
-            $data->last_name = $request->input('lastName');
+            $data->last_name = (string) $request->input('lastName');
 
         if ( $request->has('address') )
-            $data->address = $request->input('address');
+            $data->address = (string) $request->input('address');
 
         if ( $request->has('number') )
-            $data->number = $request->input('number');
+            $data->number = (int) $request->input('number');
+
+        if ( $request->has('status') )
+            $data->number = (int) $request->input('number');
 
         if ( count((array) $data) === 1 )
         {
