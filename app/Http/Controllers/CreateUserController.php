@@ -7,6 +7,7 @@ use App\Interfaces\Service\CreateUserService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\ErrorHandler\Error\FatalError;
 
 class CreateUserController extends Controller
 {
@@ -60,8 +61,22 @@ class CreateUserController extends Controller
             ? $request->input('lastName')
             : null;
 
-        //If everything's ok, go to the responsible service.
-        $result = $this->service->createUser($data);
+        try {
+            //If everything's ok, go to the responsible service.
+            $result = $this->service->createUser($data);
+        } catch (\Exception | \PDOException | FatalError $exception)
+        {
+            $this->DTO->setStatusCode(500);
+            $this->DTO->setMessage($exception->getMessage());
+            $this->DTO->setCode(5012);
+
+            return \response()->json(
+                $this->DTO->retornarArray(),
+                $this->DTO->getStatusCode(),
+                [],
+                JSON_UNESCAPED_UNICODE
+            );
+        }
 
         Log::info(
             'Controller: LoginController\login. Object returned to Application Service: ',

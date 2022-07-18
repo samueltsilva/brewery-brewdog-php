@@ -2,9 +2,9 @@
 
 namespace App\Interfaces\Service;
 
-use App\DTO\ReturnGetUserDTO;
+use App\DTO\ReturnBeerDTO;
 
 interface BeersService
 {
-    public function getBeer(\stdClass $data) : ReturnGetUserDTO;
+    public function getBeer(string $query) : ReturnBeerDTO;
 }

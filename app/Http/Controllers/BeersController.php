@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\DTO\ReturnGetUserDTO;
 use App\Interfaces\Service\BeersService;
-use App\Interfaces\Service\GetUserService;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\ErrorHandler\Error\FatalError;
 
 class BeersController extends Controller
 {
@@ -33,20 +33,24 @@ class BeersController extends Controller
             ['Object' => $request->all()]
         );
 
+        $queryResult = $this->proccessQuery($request->query->all(), $request->query->count());
 
+        try {
+            //If everything's ok, go to the responsible service.
+            $result = $this->service->getBeer($queryResult);
+        } catch (\Exception | \PDOException | FatalError $exception)
+        {
+            $this->DTO->setStatusCode(500);
+            $this->DTO->setMessage($exception->getMessage());
+            $this->DTO->setCode(5012);
 
-        $data = new \stdClass();
-
-        $data->string = $request->input('brewered_before');
-        $data->string .= $request->input('abv_gt');
-
-        echo '<pre>', print_r($request->query, 1), '</pre>';exit();
-
-//        $data = $this->proccessQuery($request);
-
-
-        //If everything's ok, go to the responsible service.
-        $result = $this->service->getBeer($data);
+            return \response()->json(
+                $this->DTO->retornarArray(),
+                $this->DTO->getStatusCode(),
+                [],
+                JSON_UNESCAPED_UNICODE
+            );
+        }
 
         Log::info(
             'Controller: BeersController\get. Object returned to Application Service: ',
@@ -61,9 +65,19 @@ class BeersController extends Controller
         );
     }
 
-    private function proccessQuery(Request $request)
+    private function proccessQuery(array $query, int $count) : string
     {
+        $queryResult = '?';
 
+        foreach ($query as $key => $value)
+        {
+            if ( $count !== 0 )
+            {
+                $queryResult .= $key . '=' . $value .= '&';
+                $count--;
+            }
+        }
 
+        return $queryResult;
     }
 }
