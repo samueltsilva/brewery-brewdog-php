@@ -3,7 +3,7 @@
 /**
  * @OA\Info(
  *     version="1.0.0",
- *     title="RestAPI Brewery Brewdog"
+ *     title="Brewery Brewdog API"
  * )
  */
 

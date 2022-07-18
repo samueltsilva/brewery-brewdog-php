@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\DTO\ReturnBeerDTO;
-use App\DTO\ReturnGetUserDTO;
 use App\Interfaces\Service\BeersService;
 use App\Libraries\RestCommunication;
 use Illuminate\Support\Facades\Config;
@@ -35,6 +34,7 @@ class BeersServiceImpl implements BeersService
         }
 
         $this->DTO->setStatusCode(200);
+        $this->DTO->setCode(5013);
         $this->DTO->setMessage("You got your beers successfully!");
         $this->DTO->setBeers($responseObject);
 
