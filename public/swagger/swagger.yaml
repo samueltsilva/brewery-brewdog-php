@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: 'RestAPI Brewery Brewdog'
+  title: 'Brewery Brewdog API'
   version: 1.0.0
 servers:
   -
@@ -209,6 +209,147 @@ paths:
                 type: array
                 items:
                   properties: { message: { type: string }, internalCode: { type: integer }, deleted: { type: boolean } }
+                  type: object
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: 'Not Found'
+        '406':
+          description: 'Not Acceptable'
+        '500':
+          description: 'Internal Server Error'
+      security:
+        -
+          bearerAuth: []
+  /beers:
+    get:
+      tags:
+        - Beers
+      description: 'route to get the beers from Brewery Brewdog.'
+      parameters:
+        -
+          parameter: general--page
+          name: abv_gt
+          in: query
+          description: ''
+          schema:
+            type: integer
+            default: ''
+        -
+          parameter: general--page
+          name: abv_lt
+          in: query
+          description: ''
+          schema:
+            type: integer
+            default: ''
+        -
+          parameter: general--page
+          name: ibu_gt
+          in: query
+          description: ''
+          schema:
+            type: integer
+            default: ''
+        -
+          parameter: general--page
+          name: ibu_lt
+          in: query
+          description: ''
+          schema:
+            type: integer
+            default: ''
+        -
+          parameter: general--page
+          name: ebc_gt
+          in: query
+          description: ''
+          schema:
+            type: integer
+            default: ''
+        -
+          parameter: general--page
+          name: ebc_lt
+          in: query
+          description: ''
+          schema:
+            type: integer
+            default: ''
+        -
+          parameter: general--page
+          name: beer_name
+          in: query
+          description: ''
+          schema:
+            type: string
+            default: ''
+        -
+          parameter: general--page
+          name: yeast
+          in: query
+          description: ''
+          schema:
+            type: string
+            default: ''
+        -
+          parameter: general--page
+          name: brewered_before
+          in: query
+          description: ''
+          schema:
+            type: string
+            default: ''
+        -
+          parameter: general--page
+          name: brewered_after
+          in: query
+          description: ''
+          schema:
+            type: string
+            default: ''
+        -
+          parameter: general--page
+          name: hops
+          in: query
+          description: ''
+          schema:
+            type: string
+            default: ''
+        -
+          parameter: general--page
+          name: malt
+          in: query
+          description: ''
+          schema:
+            type: string
+            default: ''
+        -
+          parameter: general--page
+          name: food
+          in: query
+          description: ''
+          schema:
+            type: string
+            default: ''
+        -
+          parameter: general--page
+          name: ids
+          in: query
+          description: ''
+          schema:
+            type: string
+            default: ''
+      responses:
+        '200':
+          description: Sucess
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties: { message: { type: string }, internalCode: { type: integer }, user: { properties: { id_users: { type: integer }, username: { type: string }, password: { type: string }, first_name: { type: string }, last_name: { type: string }, address: { type: string }, number: { type: integer }, status: { type: integer }, created_at: { type: string }, updated_at: { type: string }, deleted_at: { type: string } }, type: object } }
                   type: object
         '401':
           description: Unauthorized

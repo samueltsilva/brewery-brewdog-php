@@ -86,6 +86,10 @@ O Swagger estará disponível através do servidor de backend, na rota /swagger/
 > http://localhost:8080/swagger/
 <br>
 
+<div align="center">
+    <img src="./resources/functionalities/swagger.png" width="500"/>
+</div>
+
 O collection do Postman para ser importado e usado no programa está na raiz do projeto.
 
 ## Tecnologias utilizadas

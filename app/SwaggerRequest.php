@@ -268,18 +268,138 @@
  * @OA\Parameter(
  *      parameter="general--page",
  *      in="query",
- *      name="idUsers",
- *      description="The id_users.",
+ *      name="abv_gt",
+ *      description="",
  *      @OA\Schema(
  *          type="integer",
- *          default=1,
+ *          default="",
  *      )
  * ),
  * @OA\Parameter(
  *      parameter="general--page",
  *      in="query",
- *      name="username",
- *      description="The unique username of the user.",
+ *      name="abv_lt",
+ *      description="",
+ *      @OA\Schema(
+ *          type="integer",
+ *          default="",
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="ibu_gt",
+ *      description="",
+ *      @OA\Schema(
+ *          type="integer",
+ *          default="",
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="ibu_lt",
+ *      description="",
+ *      @OA\Schema(
+ *          type="integer",
+ *          default="",
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="ebc_gt",
+ *      description="",
+ *      @OA\Schema(
+ *          type="integer",
+ *          default="",
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="ebc_lt",
+ *      description="",
+ *      @OA\Schema(
+ *          type="integer",
+ *          default="",
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="beer_name",
+ *      description="",
+ *      @OA\Schema(
+ *          type="string",
+ *          default="",
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="yeast",
+ *      description="",
+ *      @OA\Schema(
+ *          type="string",
+ *          default="",
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="brewered_before",
+ *      description="",
+ *      @OA\Schema(
+ *          type="string",
+ *          default="",
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="brewered_after",
+ *      description="",
+ *      @OA\Schema(
+ *          type="string",
+ *          default="",
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="hops",
+ *      description="",
+ *      @OA\Schema(
+ *          type="string",
+ *          default="",
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="malt",
+ *      description="",
+ *      @OA\Schema(
+ *          type="string",
+ *          default="",
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="food",
+ *      description="",
+ *      @OA\Schema(
+ *          type="string",
+ *          default="",
+ *      )
+ * ),
+ * @OA\Parameter(
+ *      parameter="general--page",
+ *      in="query",
+ *      name="ids",
+ *      description="",
  *      @OA\Schema(
  *          type="string",
  *          default="",
