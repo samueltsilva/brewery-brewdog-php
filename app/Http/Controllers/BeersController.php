@@ -73,7 +73,7 @@ class BeersController extends Controller
         {
             if ( $count !== 0 )
             {
-                $queryResult .= $key . '=' . $value .= '&';
+                $queryResult .= $key . '=' . $value . '&';
                 $count--;
             }
         }
